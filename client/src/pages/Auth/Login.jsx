@@ -35,7 +35,7 @@ function Login() {
       <div className="w-[380px] bg-white p-8 rounded-xl shadow-2xl">
 
         <h2 className="text-2xl font-semibold text-center text-[#1a1a1a] mb-6">
-          Login to Nivera
+          Login to Nevira
         </h2>
 
         <div className="flex flex-col gap-4">
