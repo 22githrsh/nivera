@@ -4,50 +4,80 @@ import { useLocation,useNavigate } from "react-router-dom"
 
 function VerifyOtp(){
 
-const [otp,setOtp] = useState("")
+  const [otp,setOtp] = useState("")
 
-const location = useLocation()
-const navigate = useNavigate()
+  const location = useLocation()
+  const navigate = useNavigate()
 
-const phone = location.state?.phone
+  const phone = location.state?.phone
 
-const handleVerify = async ()=>{
+  const handleVerify = async ()=>{
 
-try{
+    try{
 
-await verifyOtpService({
- phone,
- otp
-})
+      await verifyOtpService({
+        phone,
+        otp
+      })
 
-navigate("/home")
+      navigate("/home")
 
-}catch(err){
+    }catch(err){
 
-console.log(err)
+      console.log(err)
 
-}
+    }
 
-}
+  }
 
-return(
+  return(
 
-<div>
+    <div className="min-h-screen flex items-center justify-center bg-[#1A1A1A]">
 
-<h2>Verify Phone OTP</h2>
+      <div className="w-[380px] bg-white p-8 rounded-xl shadow-xl">
 
-<input
-placeholder="Enter OTP"
-onChange={(e)=>setOtp(e.target.value)}
-/>
+        <h2 className="text-2xl font-semibold text-center text-black mb-2">
+          Verify OTP
+        </h2>
 
-<button onClick={handleVerify}>
-Verify OTP
-</button>
+        <p className="text-sm text-gray-500 text-center mb-6">
+          Enter the OTP sent to your phone
+        </p>
 
-</div>
+        <div className="flex flex-col gap-4">
 
-)
+          <input
+            type="text"
+            placeholder="Enter OTP"
+            value={otp}
+            onChange={(e)=>setOtp(e.target.value)}
+            className="border border-gray-300 px-4 py-2 rounded-md outline-none text-center tracking-widest text-lg focus:border-[#FE701A]"
+          />
+
+          <button
+            onClick={handleVerify}
+            className="bg-[#FE701A] hover:bg-[#FE904D] text-white py-2 rounded-md font-medium transition"
+          >
+            Verify OTP
+          </button>
+
+          <p className="text-xs text-gray-400 text-center">
+            Didn't receive OTP?
+          </p>
+
+          <button
+            className="text-[#FE701A] text-sm font-medium hover:underline"
+          >
+            Resend OTP
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  )
 
 }
 

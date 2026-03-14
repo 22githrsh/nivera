@@ -53,7 +53,12 @@ function Login() {
             className="border border-gray-300 rounded-md px-4 py-2 outline-none focus:border-[#FE701A]"
             onChange={(e)=>setPassword(e.target.value)}
           />
-
+           <button
+            onClick={() => navigate("/register")}
+            className="border border-[#FE701A] text-[#FE701A] py-2 rounded-md hover:bg-[#FE701A] hover:text-white transition"
+          >
+            Register your account
+          </button>
           <button
             onClick={handleLogin}
             className="bg-[#FE701A] hover:bg-[#FE904D] text-white py-2 rounded-md font-medium transition duration-200"
