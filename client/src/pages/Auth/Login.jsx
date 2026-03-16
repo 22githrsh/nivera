@@ -96,7 +96,7 @@ function Login() {
             Register your account
           </button>
 
-        </div>
+        </div >
 
       </div>
 
