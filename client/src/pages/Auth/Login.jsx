@@ -1,18 +1,22 @@
 import { useState } from "react"
 import { login } from "../../services/authService"
 import { useNavigate } from "react-router-dom"
+import Loader from "../../components/common/Loader"
 
 function Login() {
 
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [showPassword, setShowPassword] = useState(false)
+  const [loading, setLoading] = useState(false)
 
   const navigate = useNavigate()
 
   const handleLogin = async () => {
 
     try {
+
+      setLoading(true)
 
       const res = await login({
         email,
@@ -27,9 +31,15 @@ function Login() {
 
       console.log(err)
 
+    } finally {
+
+      setLoading(false)
+
     }
 
   }
+
+  if (loading) return <Loader />
 
   return (
 
@@ -43,8 +53,6 @@ function Login() {
 
         <div className="flex flex-col gap-4">
 
-          {/* EMAIL */}
-
           <input
             type="email"
             placeholder="Email address"
@@ -52,8 +60,6 @@ function Login() {
             onChange={(e) => setEmail(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && handleLogin()}
           />
-
-          {/* PASSWORD */}
 
           <div className="relative">
 
@@ -74,16 +80,12 @@ function Login() {
 
           </div>
 
-          {/* LOGIN BUTTON */}
-
           <button
             onClick={handleLogin}
             className="bg-[#FE701A] hover:bg-[#FE904D] text-white py-2 rounded-md font-medium transition"
           >
             Login
           </button>
-
-          {/* REGISTER */}
 
           <p className="text-sm text-center text-gray-500">
             Don't have an account?
@@ -96,7 +98,7 @@ function Login() {
             Register your account
           </button>
 
-        </div >
+        </div>
 
       </div>
 

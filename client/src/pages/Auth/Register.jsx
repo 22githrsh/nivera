@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { register } from "../../services/authService"
 import { useNavigate } from "react-router-dom"
+import Loader from "../../components/common/Loader"
 
 function Register() {
 
@@ -8,6 +9,7 @@ function Register() {
   const [email, setEmail] = useState("")
   const [phone, setPhone] = useState("")
   const [password, setPassword] = useState("")
+    const [loading,setLoading] = useState(false)
 
   const navigate = useNavigate()
 
@@ -30,7 +32,7 @@ function Register() {
     }
 
   }
-
+  if(loading) return <Loader/>
   return (
 
     <div className="min-h-screen flex items-center justify-center bg-[#1A1A1A]">

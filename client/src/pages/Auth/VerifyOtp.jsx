@@ -1,10 +1,12 @@
 import { useState } from "react"
 import { verifyOtpService } from "../../services/authService"
-import { useLocation,useNavigate } from "react-router-dom"
+import { useLocation, useNavigate } from "react-router-dom"
+import Loader from "../../components/common/Loader"
 
 function VerifyOtp(){
 
   const [otp,setOtp] = useState("")
+  const [loading,setLoading] = useState(false)
 
   const location = useLocation()
   const navigate = useNavigate()
@@ -14,6 +16,8 @@ function VerifyOtp(){
   const handleVerify = async ()=>{
 
     try{
+
+      setLoading(true)
 
       await verifyOtpService({
         phone,
@@ -26,15 +30,21 @@ function VerifyOtp(){
 
       console.log(err)
 
+    }finally{
+
+      setLoading(false)
+
     }
 
   }
 
+  if(loading) return <Loader/>
+
   return(
 
-    <div className="min-h-screen flex items-center justify-center bg-[#1A1A1A]">
+    <div className="min-h-screen flex items-center justify-center bg-[#1A1A1A] px-4">
 
-      <div className="w-[380px] bg-white p-8 rounded-xl shadow-xl">
+      <div className="w-full max-w-[380px] bg-white p-8 rounded-xl shadow-xl">
 
         <h2 className="text-2xl font-semibold text-center text-black mb-2">
           Verify OTP
