@@ -1,12 +1,23 @@
-import React from 'react'
-import AppRoutes from './routes/AppRoutes';
+import { BrowserRouter } from "react-router-dom"
+import Navbar from "./components/layout/Navbar"
+import AppRoutes from "./routes/AppRoutes"
 
-const App = () => {
+function App() {
+
   return (
-    <div>
-      <AppRoutes />  
-    </div>
+
+    <BrowserRouter>
+
+      <Navbar />
+
+      <div className="pt-[10vh]">
+        <AppRoutes />
+      </div>
+
+    </BrowserRouter>
+
   )
+
 }
 
-export default App;
+export default App

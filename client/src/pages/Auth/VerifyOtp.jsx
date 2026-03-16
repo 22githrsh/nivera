@@ -20,7 +20,7 @@ function VerifyOtp(){
         otp
       })
 
-      navigate("/home")
+      navigate("/")
 
     }catch(err){
 

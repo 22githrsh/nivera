@@ -87,7 +87,7 @@ function Register() {
           </p>
 
           <button
-            onClick={() => navigate("/")}
+            onClick={() => navigate("/login")}
             className="border border-[#FE701A] text-[#FE701A] py-2 rounded-md hover:bg-[#FE701A] hover:text-white transition"
           >
             Back to Login
