@@ -2,6 +2,7 @@ import { useState } from "react"
 import { login } from "../../services/authService"
 import { useNavigate } from "react-router-dom"
 import Loader from "../../components/common/Loader"
+import { useAuth } from "../../context/AuthContext"
 
 function Login() {
 
@@ -11,38 +12,36 @@ function Login() {
   const [loading, setLoading] = useState(false)
 
   const navigate = useNavigate()
+  const { setUser } = useAuth()
 
-  const handleLogin = async () => {
+const handleLogin = async () => {
+  try {
+    setLoading(true)
 
-    try {
+    const res = await login({
+      email,
+      password
+    })
 
-      setLoading(true)
+    const user = res.data.user
 
-      const res = await login({
-        email,
-        password
-      })
+    localStorage.setItem("token", res.data.accessToken)
+    localStorage.setItem("refreshToken", res.data.refreshToken)
 
-      console.log(res)
+    setUser(user)
 
-      navigate("/")
+    navigate(`/profile/${user.username}`)
 
-    } catch (err) {
-
-      console.log(err)
-
-    } finally {
-
-      setLoading(false)
-
-    }
-
+  } catch (err) {
+    console.log(err)
+  } finally {
+    setLoading(false)
   }
+}
 
   if (loading) return <Loader />
 
   return (
-
     <div className="min-h-screen flex items-center justify-center bg-[#1A1A1A]">
 
       <div className="w-[380px] bg-white p-8 rounded-xl shadow-2xl">
@@ -103,9 +102,7 @@ function Login() {
       </div>
 
     </div>
-
   )
-
 }
 
 export default Login
